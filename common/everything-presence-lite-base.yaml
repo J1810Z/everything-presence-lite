@@ -14,25 +14,9 @@ esp32:
 
 # Enable logging
 logger:
-  level: ${log_level}
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: !secret api_key_presence_flur
-
-ota:
-  - platform: esphome
-    id: ota_esphome
-  - platform: http_request
-    id: ota_http_request
+  level: ${log_level} 
 
 http_request:
-
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-  use_address: !secret static_ip_presence_flur
 
 improv_seriasl:
 
