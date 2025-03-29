@@ -26,6 +26,23 @@ binary_sensor:
     name: Occupancy
     device_class: Occupancy
 
+  - platform: template
+    name: "Occupancy Still"
+    lambda: |-
+      if (id(gate_0_still_energy).state > id(gate_0_still_threshold).state ||
+          id(gate_1_still_energy).state > id(gate_1_still_threshold).state ||
+          id(gate_2_still_energy).state > id(gate_2_still_threshold).state ||
+          id(gate_3_still_energy).state > id(gate_3_still_threshold).state ||
+          id(gate_4_still_energy).state > id(gate_4_still_threshold).state ||
+          id(gate_5_still_energy).state > id(gate_5_still_threshold).state ||
+          id(gate_6_still_energy).state > id(gate_6_still_threshold).state ||
+          id(gate_7_still_energy).state > id(gate_7_still_threshold).state ||
+          id(gate_8_still_energy).state > id(gate_8_still_threshold).state) {
+        return true;
+      }
+      return false;
+    device_class: motion
+
 sensor:
   - platform: ld2410
     light:
