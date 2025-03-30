@@ -126,7 +126,7 @@ sensor:
     g8:
       move_energy:
         name: Gate 8 Movement Energy
-        id: gate__movement_energy
+        id: gate_8_movement_energy
       still_energy:
         name: Gate 8 Still Energy
         id: gate_8_still_energy
