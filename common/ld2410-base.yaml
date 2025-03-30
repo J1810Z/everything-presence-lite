@@ -27,7 +27,7 @@ binary_sensor:
     device_class: Occupancy
 
   - platform: template
-    name: "Occupancy Still"
+    name: "Occupancy Actual"
     lambda: |-
       if (id(gate_0_still_energy).state > id(gate_0_still_threshold).state ||
           id(gate_1_still_energy).state > id(gate_1_still_threshold).state ||
@@ -37,7 +37,16 @@ binary_sensor:
           id(gate_5_still_energy).state > id(gate_5_still_threshold).state ||
           id(gate_6_still_energy).state > id(gate_6_still_threshold).state ||
           id(gate_7_still_energy).state > id(gate_7_still_threshold).state ||
-          id(gate_8_still_energy).state > id(gate_8_still_threshold).state) {
+          id(gate_8_still_energy).state > id(gate_8_still_threshold).state ||
+          id(gate_0_movement_energy).state > id(gate_0_movement_threshold).state ||
+          id(gate_1_movement_energy).state > id(gate_1_movement_threshold).state ||
+          id(gate_2_movement_energy).state > id(gate_2_movement_threshold).state ||
+          id(gate_3_movement_energy).state > id(gate_3_movement_threshold).state ||
+          id(gate_4_movement_energy).state > id(gate_4_movement_threshold).state ||
+          id(gate_5_movement_energy).state > id(gate_5_movement_threshold).state ||
+          id(gate_6_movement_energy).state > id(gate_6_movement_threshold).state ||
+          id(gate_7_movement_energy).state > id(gate_7_movement_threshold).state ||
+          id(gate_8_movement_energy).state > id(gate_8_movement_threshold).state) {
         return true;
       }
       return false;
@@ -61,54 +70,63 @@ sensor:
     g0:
       move_energy:
         name: Gate 0 Movement Energy
+        id: gate_0_movement_energy
       still_energy:
         name: Gate 0 Still Energy
         id: gate_0_still_energy
     g1:
       move_energy:
         name: Gate 1 Movement Energy
+        id: gate_1_movement_energy
       still_energy:
         name: Gate 1 Still Energy
         id: gate_1_still_energy
     g2:
       move_energy:
         name: Gate 2 Movement Energy
+        id: gate_2_movement_energy
       still_energy:
         name: Gate 2 Still Energy
         id: gate_2_still_energy
     g3:
       move_energy:
         name: Gate 3 Movement Energy
+        id: gate_3_movement_energy
       still_energy:
         name: Gate 3 Still Energy
         id: gate_3_still_energy
     g4:
       move_energy:
         name: Gate 4 Movement Energy
+        id: gate_4_movement_energy
       still_energy:
         name: Gate 4 Still Energy
         id: gate_4_still_energy
     g5:
       move_energy:
         name: Gate 5 Movement Energy
+        id: gate_5_movement_energy
       still_energy:
         name: Gate 5 Still Energy
         id: gate_5_still_energy
     g6:
       move_energy:
         name: Gate 6 Movement Energy
+        id: gate_6_movement_energy
       still_energy:
         name: Gate 6 Still Energy
         id: gate_6_still_energy
     g7:
       move_energy:
         name: Gate 7 Movement Energy
+        id: gate_7_movement_energy
       still_energy:
         name: Gate 7 Still Energy
         id: gate_7_still_energy
     g8:
       move_energy:
         name: Gate 8 Movement Energy
+        id: gate__movement_energy
       still_energy:
         name: Gate 8 Still Energy
         id: gate_8_still_energy
@@ -136,54 +154,63 @@ number:
     g0:
       move_threshold:
         name: Gate 0 Movement Sensitivity
+        id: gate_0_movement_threshold
       still_threshold:
         name: Gate 0 Still Sensitivity
         id: gate_0_still_threshold
     g1:
       move_threshold:
         name: Gate 1 Movement Sensitivity
+        id: gate_1_movement_threshold
       still_threshold:
         name: Gate 1 Still Sensitivity
         id: gate_1_still_threshold
     g2:
       move_threshold:
         name: Gate 2 Movement Sensitivity
+        id: gate_2_movement_threshold
       still_threshold:
         name: Gate 2 Still Sensitivity
         id: gate_2_still_threshold
     g3:
       move_threshold:
         name: Gate 3 Movement Sensitivity
+        id: gate_3_movement_threshold
       still_threshold:
         name: Gate 3 Still Sensitivity
         id: gate_3_still_threshold
     g4:
       move_threshold:
         name: Gate 4 Movement Sensitivity
+        id: gate_4_movement_threshold
       still_threshold:
         name: Gate 4 Still Sensitivity
         id: gate_4_still_threshold
     g5:
       move_threshold:
         name: Gate 5 Movement Sensitivity
+        id: gate_5_movement_threshold
       still_threshold:
         name: Gate 5 Still Sensitivity
         id: gate_5_still_threshold
     g6:
       move_threshold:
         name: Gate 6 Movement Sensitivity
+        id: gate_6_movement_threshold
       still_threshold:
         name: Gate 6 Still Sensitivity
         id: gate_6_still_threshold
     g7:
       move_threshold:
         name: Gate 7 Movement Sensitivity
+        id: gate_7_movement_threshold
       still_threshold:
         name: Gate 7 Still Sensitivity
         id: gate_7_still_threshold
     g8:
       move_threshold:
         name: Gate 8 Movement Sensitivity
+        id: gate_8_movement_threshold
       still_threshold:
         name: Gate 8 Still Sensitivity
         id: gate_8_still_threshold
