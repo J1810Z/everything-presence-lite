@@ -266,10 +266,11 @@ select:
       disabled_by_default: true
 
 input_number:
-  motion_timeout:
+  - platform: template
     name: "Motion Timeout"
-    initial: 500
-    min: 100
-    max: 30000
-    step: 100
-    unit_of_measurement: "ms" 
+    id: motion_timeout
+    initial: 500  # Default timeout value in milliseconds
+    min: 100      # Minimum value in milliseconds
+    max: 30000    # Maximum value in milliseconds
+    step: 100     # Step size for adjusting the timeout
+    unit_of_measurement: "ms"  # Unit for milliseconds
