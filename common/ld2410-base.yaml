@@ -16,7 +16,7 @@ ld2410:
 globals:
   - id: occupancy_delay
     type: int
-    initial_value: 500
+    initial_value: "500"
 
 binary_sensor:
   - platform: ld2410
