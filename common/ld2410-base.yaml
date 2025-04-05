@@ -164,9 +164,9 @@ number:
     name: "Occupancy Delay"
     id: "occupany_delay_input"
     internal: false
+    min_value: 0
+    max_value: 5000
     on_value:
-      min_value: 0
-      max_value: 5000
       then:
         - lambda: |-
             id(occupancy_delay) = x;
