@@ -32,7 +32,7 @@ binary_sensor:
     device_class: Occupancy
 
   - platform: template
-    name: "Occupancy Actual"
+    name: "Occupancy Actual 2"
     lambda: |-
       static unsigned long last_trigger_time = 0;  // Stores the last time the sensor triggered
       unsigned long current_time = millis();  // Get the current time
@@ -162,7 +162,7 @@ switch:
 
 number:
   - platform: template
-    name: Occupancy Delay
+    name: "Occupancy Delay"
     id: "occupany_delay_input"
     internal: false
     on_value:
