@@ -67,8 +67,7 @@ binary_sensor:
         last_trigger_time = current_time;  // Update last trigger time
         return true;  // Trigger motion
       }
-
-    return false;  // No trigger
+      return false;  // No trigger
     device_class: motion
 
 
