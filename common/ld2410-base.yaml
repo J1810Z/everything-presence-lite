@@ -60,12 +60,13 @@ binary_sensor:
       );
 
       // Trigger only if motion is detected and 1 second has passed since the last trigger
-      if (motion_detected && (current_time - last_trigger_time > 500)) {
+      if (motion_detected && (current_time - last_trigger_time > 1000)) {
         last_trigger_time = current_time;  // Update last trigger time
         return true;  // Trigger motion
       }
-      return false;
-    device_class: motion
+
+    return false;  // No trigger
+  device_class: motion
 
 sensor:
   - platform: ld2410
