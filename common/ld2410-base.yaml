@@ -17,6 +17,12 @@ globals:
   - id: occupancy_delay
     type: int
     initial_value: "500"
+  - id: last_state
+    type: bool
+    initial_value: 'false'
+  - id: last_change_time
+    type: unsigned long
+    initial_value: '0'
 
 binary_sensor:
   - platform: ld2410
@@ -34,7 +40,6 @@ binary_sensor:
   - platform: template
     name: "Occupancy Actual"
     lambda: |-
-      static unsigned long last_trigger_time = 0;  // Stores the last time the sensor triggered
       unsigned long current_time = millis();  // Get the current time
 
       // Check if any energy values exceed the threshold
@@ -59,14 +64,15 @@ binary_sensor:
         id(gate_8_movement_energy).state > id(gate_8_movement_threshold).state
       );
 
-      // Trigger only if motion is detected and 1 second has passed since the last trigger
-      if (motion_detected && (current_time - last_trigger_time > 1000)) {
-        last_trigger_time = current_time;  // Update last trigger time
-        return true;  // Trigger motion
+      // If the condition is met and has been for 2 seconds, update the state
+      if (motion_detected != id(last_state)) {
+        if (current_time - id(last_change_time) >= 2000) {
+          id(last_state) = motion_detected;
+          id(last_change_time) = current_time;
+        }
       }
-
-    return false;  // No trigger
-  device_class: motion
+      return id(last_state);
+    device_class: motion
 
 sensor:
   - platform: ld2410
