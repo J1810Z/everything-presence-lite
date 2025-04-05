@@ -164,6 +164,7 @@ number:
   - platform: template
     name: Occupancy Delay
     id: "occupany_delay_input"
+    internal: false
     on_value:
       then:
         - lambda: |-
