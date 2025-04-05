@@ -261,6 +261,11 @@ text_sensor:
     mac_address:
       name: "mmWave MAC Address"
       disabled_by_default: true
+  - platform: template
+    name: "Global Variable Display"
+    lambda: |-
+      return id(my_global_string);
+    update_interval: 5s
 
 select:
   - platform: ld2410
