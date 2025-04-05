@@ -66,7 +66,7 @@ binary_sensor:
 
       // If the condition is met and has been for 2 seconds, update the state
       if (motion_detected != id(last_state)) {
-        if (current_time - id(last_change_time) >= 2000) {
+        if (current_time - id(last_change_time) >= if(occupancy_delay)) {
           id(last_state) = motion_detected;
           id(last_change_time) = current_time;
         }
