@@ -163,6 +163,7 @@ switch:
 number:
   - platform: template
     name: Occupancy Delay
+    id: "occupany_delay_input"
     on_value:
       then:
         - lambda: |-
