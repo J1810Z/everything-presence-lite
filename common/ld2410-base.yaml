@@ -71,7 +71,7 @@ sensor:
   - platform: template
     name: "Request Response State"
     id: request_response_sensor
-    lambda: 'return id(occupancy_delay)'  # Display 1.0 if true, 0.0 if false
+    lambda: 'return id(request_response);'  # Display 1.0 if true, 0.0 if false
     update_interval: 10s
   - platform: ld2410
     light:
