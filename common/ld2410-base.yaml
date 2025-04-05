@@ -65,7 +65,7 @@ binary_sensor:
         return true;  // Trigger motion
       }
     return false;  // No trigger
-  device_class: motion
+    device_class: motion
 
 sensor:
   - platform: ld2410
