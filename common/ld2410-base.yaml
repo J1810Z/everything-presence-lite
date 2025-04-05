@@ -13,6 +13,11 @@ uart:
 
 ld2410:
 
+globals:
+  - id: occupancy_delay
+    type: int
+    initial_value: 500
+
 binary_sensor:
   - platform: ld2410
     has_target:
@@ -58,7 +63,7 @@ binary_sensor:
       );
 
       // Trigger only if motion is detected and the timeout period has passed since the last trigger
-      if (motion_detected && (current_time - last_trigger_time > timeout)) {
+      if (motion_detected && (current_time - last_trigger_time > id(occupancy_delay))) {
         last_trigger_time = current_time;  // Update last trigger time
         return true;  // Trigger motion
       }
@@ -156,6 +161,13 @@ switch:
       disabled_by_default: true
 
 number:
+  - platform: template
+    name: Occupancy Delay
+    on_value:
+      then:
+        - lambda: |-
+            id(occupancy_delay) = x;
+
   - platform: ld2410
     timeout:
       name: Occupancy Off Delay
@@ -264,13 +276,3 @@ select:
     out_pin_level:
       name: GPIO Pin Level
       disabled_by_default: true
-
-input_number:
-  - platform: template
-    name: "Motion Timeout"
-    id: motion_timeout
-    initial: 500  # Default timeout value in milliseconds
-    min: 100      # Minimum value in milliseconds
-    max: 30000    # Maximum value in milliseconds
-    step: 100     # Step size for adjusting the timeout
-    unit_of_measurement: "ms"  # Unit for milliseconds
