@@ -60,7 +60,7 @@ binary_sensor:
       );
 
       // Trigger only if motion is detected and 1 second has passed since the last trigger
-      if (motion_detected && (current_time - last_trigger_time > id(=occupancy_delay))) {
+      if (motion_detected && (current_time - last_trigger_time > id(occupancy_delay))) {
         last_trigger_time = current_time;  // Update last trigger time
         return true;  // Trigger motion
       }
