@@ -264,7 +264,7 @@ text_sensor:
   - platform: template
     name: "Global Variable Display"
     lambda: |-
-      return id(occupancy_delay);
+      return std::to_string(id(occupancy_delay).value());
     update_interval: 5s
 
 select:
