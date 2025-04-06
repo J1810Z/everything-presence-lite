@@ -39,7 +39,6 @@ binary_sensor:
 
   - platform: template
     name: "Delayed Occupancy"
-    update_interval: 1s 
     lambda: |-
       unsigned long current_time = millis();  // Get the current time
 
@@ -81,7 +80,6 @@ binary_sensor:
 
   - platform: template
     name: "Realtime Occupancy"
-    update_interval: 1s 
     lambda: |-
       unsigned long current_time = millis();  // Get the current time
 
