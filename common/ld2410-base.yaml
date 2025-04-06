@@ -79,7 +79,7 @@ binary_sensor:
       }
     device_class: motion
 
-- platform: template
+  - platform: template
     name: "Realtime Occupancy"
     update_interval: 1s 
     lambda: |-
