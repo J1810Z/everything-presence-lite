@@ -14,6 +14,9 @@ uart:
 ld2410:
 
 globals:
+  - id: last_state
+    type: bool
+    initial_value: 'false'
   - id: custom_clear_delay
     type: int
     initial_value: "1000"
@@ -39,10 +42,9 @@ binary_sensor:
 
   - platform: template
     name: "Delayed Occupancy"
+    device_class: motion
     lambda: |-
       unsigned long current_time = millis();  // Get the current time
-
-      // Check if any energy values exceed the threshold
       bool motion_detected = (
         id(gate_0_still_energy).state > id(gate_0_still_threshold).state ||
         id(gate_1_still_energy).state > id(gate_1_still_threshold).state ||
@@ -64,21 +66,31 @@ binary_sensor:
         id(gate_8_movement_energy).state > id(gate_8_movement_threshold).state
       );
 
-      // If the condition is met and has been for 2 seconds, update the state
-      if (motion_detected) {
+      if (motion_detected && !id(last_state)) {
+        // Transitioning from clear to detected — wait for detected delay
         if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
+          id(last_state) = true;
           id(last_change_time) = current_time;
           return true;
         }
+        // Still waiting to trigger detected state
         return false;
-      } else {
+      }
+
+      if (!motion_detected && id(last_state)) {
+        // Transitioning from detected to clear — wait for clear delay
         if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
-            id(last_change_time) = current_time;
-            return false;
+          id(last_state) = false;
+          id(last_change_time) = current_time;
+          return false;
         }
+        // Still within the clear delay, so stay detected
         return true;
       }
-    device_class: motion
+
+      // No state change happening — return current state
+      return id(last_state);
+
 
   - platform: template
     name: "Realtime Occupancy"
