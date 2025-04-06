@@ -66,12 +66,12 @@ binary_sensor:
 
       // If the condition is met and has been for 2 seconds, update the state
       if (motion_detected == false) {
-        if (current_time - id(last_change_time) >= id(custom_clear_delay_input)) {
+        if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
           id(last_change_time) = current_time;
           return "Clear";
         }
       } else {
-        if (current_time - id(last_change_time) >= id(custom_detected_delay_input)) {
+        if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
             id(last_change_time) = current_time;
             return "Detected";
         }
