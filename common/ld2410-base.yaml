@@ -108,7 +108,7 @@ binary_sensor:
 
       // If the condition is met and has been for 2 seconds, update the state
       if (motion_detected) {
-        if !id(last_state) {
+        if (!id(last_state)) {
           id(last_state) = true;
           id(last_change_time) = current_time;
         }
