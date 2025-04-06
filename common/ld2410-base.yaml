@@ -106,7 +106,7 @@ binary_sensor:
       );
 
       // If the condition is met and has been for 2 seconds, update the state
-      if (motion_detected == "Clear") {
+      if (motion_detected == false) {
         return "Clear";
       }
       return "Detected";
