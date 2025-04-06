@@ -65,15 +65,15 @@ binary_sensor:
       );
 
       // If the condition is met and has been for 2 seconds, update the state
-      if (motion_detected == false) {
-        if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
+      if (motion_detected) {
+        if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
           id(last_change_time) = current_time;
-          return "Clear";
+          return "Detected";
         }
       } else {
-        if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
+        if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
             id(last_change_time) = current_time;
-            return "Detected";
+            return "Clear";
         }
       }
     device_class: motion
@@ -106,10 +106,10 @@ binary_sensor:
       );
 
       // If the condition is met and has been for 2 seconds, update the state
-      if (motion_detected == false) {
-        return "Clear";
+      if (motion_detected) {
+        return "Detected";
       }
-      return "Detected";
+      return "Clear";
     device_class: motion
 
 sensor:
