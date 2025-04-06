@@ -66,31 +66,18 @@ binary_sensor:
         id(gate_8_movement_energy).state > id(gate_8_movement_threshold).state
       );
 
-      if (motion_detected && !id(last_state)) {
-        // Transitioning from clear to detected — wait for detected delay
+      if (motion_detected) {
         if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
-          id(last_state) = true;
-          id(last_change_time) = current_time;
           return true;
         }
-        // Still waiting to trigger detected state
         return false;
-      }
-
-      if (!motion_detected && id(last_state)) {
-        // Transitioning from detected to clear — wait for clear delay
+      } else {
         if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
-          id(last_state) = false;
-          id(last_change_time) = current_time;
           return false;
         }
-        // Still within the clear delay, so stay detected
         return true;
       }
-
-      // No state change happening — return current state
-      return id(last_state);
-
+      
 
   - platform: template
     name: "Realtime Occupancy"
@@ -121,9 +108,18 @@ binary_sensor:
 
       // If the condition is met and has been for 2 seconds, update the state
       if (motion_detected) {
+        if !id(last_state) {
+          id(last_state) = true;
+          id(last_change_time) = current_time;
+        }
         return true;
+      } else {
+        if id(last_state) {
+          id(last_state) = false;
+          id(last_change_time) = current_time;
+        }
+        return false;
       }
-      return false;
     device_class: motion
 
 sensor:
