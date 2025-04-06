@@ -70,11 +70,13 @@ binary_sensor:
           id(last_change_time) = current_time;
           return true;
         }
+        return false;
       } else {
         if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
             id(last_change_time) = current_time;
             return false;
         }
+        return true;
       }
     device_class: motion
 
