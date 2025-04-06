@@ -71,7 +71,7 @@ binary_sensor:
           return "Clear";
         }
       } else {
-        if (current_time - id(last_change_time) >= id(custom_occupancy_delay_input)) {
+        if (current_time - id(last_change_time) >= id(custom_detected_delay_input)) {
             id(last_change_time) = current_time;
             return "Detected";
         }
@@ -214,7 +214,7 @@ number:
             id(custom_clear_delay) = x;
   - platform: template
     name: "Occupancy Delay"
-    id: "custom_occupancy_delay_input"
+    id: "custom_detected_delay_input"
     optimistic: true
     min_value: 0
     max_value: 10000
@@ -222,7 +222,7 @@ number:
     on_value:
       then:
         - lambda: |-
-            id(custom_occupancy_delay) = x;
+            id(custom_detected_delay) = x;
 
   - platform: ld2410
     timeout:
