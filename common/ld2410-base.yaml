@@ -114,7 +114,7 @@ binary_sensor:
         }
         return true;
       } else {
-        if id(last_state) {
+        if (id(last_state)) {
           id(last_state) = false;
           id(last_change_time) = current_time;
         }
