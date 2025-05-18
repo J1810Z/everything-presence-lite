@@ -67,13 +67,17 @@ binary_sensor:
       );
 
       if (motion_detected) {
-        if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
-          return true;
+        if (id(last_state)) {
+          if (current_time - id(last_change_time) >= id(custom_detected_delay)) {
+            return true;
+          }
         }
         return false;
       } else {
-        if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
-          return false;
+        if (!id(last_state)) {
+          if (current_time - id(last_change_time) >= id(custom_clear_delay)) {
+            return false;
+          }
         }
         return true;
       }
