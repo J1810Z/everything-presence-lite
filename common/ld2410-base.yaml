@@ -37,7 +37,7 @@ binary_sensor:
       name: Still Target
   - platform: gpio
     pin: 18
-    name: Occupancy
+    name: Occupancy2
     device_class: Occupancy
 
   - platform: template
